@@ -55,10 +55,15 @@ jobs:
           pip install twine
           pip install .
 
-      - name: Build package and upload
+      - name: Set NXT_FILE_ROOTS (if needed)
+        if: github.repository != 'nxt-dev/nxt'
         env:
-          # Packaging graph expects nxt to be cloned next to nxt_editor
-          # We hack the file fall backs to trick it into working
+          # Thepackaging graph expects nxt to be cloned next to nxt_editor
+          # this is not possible in GHA so we abuse the file fall backs to
+          # trick it into working
           NXT_FILE_ROOTS: '../docs/api_docs'
+        run: echo "NXT_FILE_ROOTS=$NXT_FILE_ROOTS" >> $GITHUB_ENV
+
+      - name: Build package and upload
         run: |
           python -m nxt.cli -vv exec build/packaging.nxt -s /make_and_test_upload
