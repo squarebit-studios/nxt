@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest]
-        python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.9', '3.10', '3.11']
       fail-fast: true
     runs-on: ${{ matrix.os }}
 
@@ -50,22 +50,17 @@ jobs:
         sudo apt-get update
         sudo apt-get install -y \
           libxkbcommon-x11-0 \
-          libxrender1 \
-          libxext6 \
-          libxcb1 \
+          libxcb-cursor0 \
           libxcb-icccm4 \
           libxcb-image0 \
           libxcb-keysyms1 \
-          libxcb-randr0 \
-          libxcb-render0 \
           libxcb-render-util0 \
           libxcb-shape0 \
-          libxcb-shm0 \
-          libxcb-sync1 \
           libxcb-xfixes0 \
+          libxcb-randr0 \
           libxcb-xinerama0 \
-          libxcb-xkb1 \
-          libqt5x11extras5 \
+          libxcb-util1 \
+          libegl1 \
           xvfb
 
     - name: Ensure PIP
